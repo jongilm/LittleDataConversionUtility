@@ -32,7 +32,7 @@ ImplementationFile=LittleDataConversionUtilityDlg.cpp
 Filter=D
 BaseClass=CDialog
 VirtualFilter=dWC
-LastObject=CLittleDataConversionUtilityDlg
+LastObject=IDC_RADIO1_HEX
 
 [CLS:CAboutDlg]
 Type=0

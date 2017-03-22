@@ -6,25 +6,13 @@
 --------------------Configuration: LittleDataConversionUtility - Win32 Release--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x809 /fo"Release/LittleDataConversionUtility.res" /d "NDEBUG" /d "_AFXDLL" "D:\dev\LittleDataConversionUtility\LittleDataConversionUtility.rc"" 
-Creating temporary file "C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP454D.tmp" with contents
+Creating temporary file "C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP3DC7.tmp" with contents
 [
 /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Release/LittleDataConversionUtility.pch" /Yu"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
-"D:\dev\LittleDataConversionUtility\base64.cpp"
-"D:\dev\LittleDataConversionUtility\hexdump.cpp"
-"D:\dev\LittleDataConversionUtility\hmac.cpp"
-"D:\dev\LittleDataConversionUtility\LittleDataConversionUtility.cpp"
-"D:\dev\LittleDataConversionUtility\LittleDataConversionUtilityDlg.cpp"
-"D:\dev\LittleDataConversionUtility\md5c.cpp"
+"E:\from_home\dev\LittleDataConversionUtility\hexdump.cpp"
 ]
-Creating command line "cl.exe @C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP454D.tmp" 
-Creating temporary file "C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP454E.tmp" with contents
-[
-/nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Release/LittleDataConversionUtility.pch" /Yc"stdafx.h" /Fo"Release/" /Fd"Release/" /FD /c 
-"D:\dev\LittleDataConversionUtility\StdAfx.cpp"
-]
-Creating command line "cl.exe @C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP454E.tmp" 
-Creating temporary file "C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP454F.tmp" with contents
+Creating command line "cl.exe @C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP3DC7.tmp" 
+Creating temporary file "C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP3DC8.tmp" with contents
 [
 /nologo /subsystem:windows /incremental:no /pdb:"Release/LittleDataConversionUtility.pdb" /machine:I386 /out:"Release/LittleDataConversionUtility.exe" 
 .\Release\base64.obj
@@ -36,19 +24,10 @@ Creating temporary file "C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP454F.tmp" with
 .\Release\StdAfx.obj
 .\Release\LittleDataConversionUtility.res
 ]
-Creating command line "link.exe @C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP454F.tmp"
+Creating command line "link.exe @C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP3DC8.tmp"
 <h3>Output Window</h3>
-Compiling resources...
 Compiling...
-StdAfx.cpp
-Compiling...
-base64.cpp
 hexdump.cpp
-hmac.cpp
-LittleDataConversionUtility.cpp
-LittleDataConversionUtilityDlg.cpp
-md5c.cpp
-Generating Code...
 Linking...
 
 
@@ -59,50 +38,6 @@ LittleDataConversionUtility.exe - 0 error(s), 0 warning(s)
 --------------------Configuration: LittleDataConversionUtility - Win32 Debug--------------------
 </h3>
 <h3>Command Lines</h3>
-Creating command line "rc.exe /l 0x809 /fo"Debug/LittleDataConversionUtility.res" /d "_DEBUG" /d "_AFXDLL" "D:\dev\LittleDataConversionUtility\LittleDataConversionUtility.rc"" 
-Creating temporary file "C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP4551.tmp" with contents
-[
-/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/LittleDataConversionUtility.pch" /Yu"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"D:\dev\LittleDataConversionUtility\base64.cpp"
-"D:\dev\LittleDataConversionUtility\hexdump.cpp"
-"D:\dev\LittleDataConversionUtility\hmac.cpp"
-"D:\dev\LittleDataConversionUtility\LittleDataConversionUtility.cpp"
-"D:\dev\LittleDataConversionUtility\LittleDataConversionUtilityDlg.cpp"
-"D:\dev\LittleDataConversionUtility\md5c.cpp"
-]
-Creating command line "cl.exe @C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP4551.tmp" 
-Creating temporary file "C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP4552.tmp" with contents
-[
-/nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /Fp"Debug/LittleDataConversionUtility.pch" /Yc"stdafx.h" /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
-"D:\dev\LittleDataConversionUtility\StdAfx.cpp"
-]
-Creating command line "cl.exe @C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP4552.tmp" 
-Creating temporary file "C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP4553.tmp" with contents
-[
-/nologo /subsystem:windows /incremental:yes /pdb:"Debug/LittleDataConversionUtility.pdb" /debug /machine:I386 /out:"Debug/LittleDataConversionUtility.exe" /pdbtype:sept 
-.\Debug\base64.obj
-.\Debug\hexdump.obj
-.\Debug\hmac.obj
-.\Debug\LittleDataConversionUtility.obj
-.\Debug\LittleDataConversionUtilityDlg.obj
-.\Debug\md5c.obj
-.\Debug\StdAfx.obj
-.\Debug\LittleDataConversionUtility.res
-]
-Creating command line "link.exe @C:\DOCUME~1\J46B8~1.GIL\LOCALS~1\Temp\RSP4553.tmp"
-<h3>Output Window</h3>
-Compiling resources...
-Compiling...
-StdAfx.cpp
-Compiling...
-base64.cpp
-hexdump.cpp
-hmac.cpp
-LittleDataConversionUtility.cpp
-LittleDataConversionUtilityDlg.cpp
-md5c.cpp
-Generating Code...
-Linking...
 
 
 

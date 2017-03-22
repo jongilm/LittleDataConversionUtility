@@ -19,6 +19,7 @@ typedef enum
 
 extern void hexdump_config(HEXDUMP_CONFIG config_param, int Value);
 extern int hexdump(unsigned char *pBufferIn, unsigned int cbBufferIn, unsigned char *pBufferOut, unsigned int *pcbBufferOut);
+extern int hexundump(unsigned char *pBufferIn, unsigned int cbBufferIn, unsigned char *pBufferOut, unsigned int *pcbBufferOut);
 
 #ifdef __cplusplus
 }

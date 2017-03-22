@@ -394,16 +394,32 @@ void CLittleDataConversionUtilityDlg::OnButtonConvert()
   }
   else if (m_Action == ACTION_HEX) // 0=Base64, 1=Hex, 2=MD5 (default=Base64) 
   {
-    int rc;
+    if (m_Radio_Encode==0) // Encode
+    {
+      int rc;
 
-    cbBuffer1 = m_Edit1.GetLength();
-    pBuffer1 = (unsigned char *)m_Edit1.GetBuffer(cbBuffer1);
-    m_Edit2.Empty();
-    pBuffer2 = (unsigned char *)m_Edit2.GetBuffer(ENCODE_BUFFER_SIZE_OUT);
-    cbBuffer2 = 0;
+      cbBuffer1 = m_Edit1.GetLength();
+      pBuffer1 = (unsigned char *)m_Edit1.GetBuffer(cbBuffer1);
+      m_Edit2.Empty();
+      pBuffer2 = (unsigned char *)m_Edit2.GetBuffer(ENCODE_BUFFER_SIZE_OUT);
+      cbBuffer2 = 0;
 
-    rc = hexdump(pBuffer1, cbBuffer1, pBuffer2, &cbBuffer2);
-    m_Edit2.ReleaseBuffer(cbBuffer2);
+      rc = hexdump(pBuffer1, cbBuffer1, pBuffer2, &cbBuffer2);
+      m_Edit2.ReleaseBuffer(cbBuffer2);
+    }
+    else if (m_Radio_Encode==1) // Decode
+    {
+      int rc;
+
+      cbBuffer2 = m_Edit2.GetLength();
+      pBuffer2 = (unsigned char *)m_Edit2.GetBuffer(cbBuffer2);
+      m_Edit1.Empty();
+      pBuffer1 = (unsigned char *)m_Edit1.GetBuffer(ENCODE_BUFFER_SIZE_OUT);
+      cbBuffer1 = 0;
+
+      rc = hexundump(pBuffer2, cbBuffer2, pBuffer1, &cbBuffer1);
+      m_Edit1.ReleaseBuffer(cbBuffer1);
+    }
   }
   else if (m_Action == ACTION_MD5) // 0=Base64, 1=Hex, 2=MD5 (default=Base64) 
   {
@@ -606,9 +622,9 @@ void CLittleDataConversionUtilityDlg::OnRadio1Hex()
   GetDlgItem(IDC_EDIT1)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_EDIT2)->EnableWindow(TRUE); // Without a member variable
 
-  GetDlgItem(IDC_STATIC_ENCODE_DECODE)->EnableWindow(FALSE); // Without a member variable
-  GetDlgItem(IDC_RADIO_ENCODE)->EnableWindow(FALSE); // Without a member variable
-  GetDlgItem(IDC_RADIO_DECODE)->EnableWindow(FALSE); // Without a member variable
+  GetDlgItem(IDC_STATIC_ENCODE_DECODE)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_ENCODE)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_DECODE)->EnableWindow(TRUE); // Without a member variable
 
   GetDlgItem(IDC_STATIC_FORMAT)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_VERBOSE)->EnableWindow(TRUE); // Without a member variable

@@ -227,3 +227,102 @@ int hexdump(unsigned char *pBufferIn, unsigned int cbBufferIn, unsigned char *pB
    return 0;
 }
 
+int HexCharToBin (char ch)
+{
+  ch = toupper(ch);
+  if (ch>='0' && ch<='9')
+    return ch-'0';
+  else if (ch>='A' && ch<='F')
+    return ch-'A' + 10;
+  else
+    return 0;
+}
+
+int hexundump(unsigned char *pBufferIn, unsigned int cbBufferIn, unsigned char *pBufferOut, unsigned int *pcbBufferOut)
+//--------------------------------------------------------------
+// 
+//--------------------------------------------------------------
+{
+   unsigned int SizeOfFile;
+   unsigned char *pIn;
+   char *pOut;
+   //int n;
+
+   pIn = pBufferIn;
+   pOut = (char *)pBufferOut;
+   *pcbBufferOut = 0;
+
+   SizeOfFile = cbBufferIn;
+
+
+   //if (g_ASCII_only)
+   {
+      int CharsProcessed;
+      char ch;
+      char ch1;
+      char ch2;
+      unsigned int i;
+      int LineOpen;
+
+      CharsProcessed = 0;
+      LineOpen = 0;
+      //while (!feof(infile))
+      for (i=0; i<SizeOfFile/2; i++)
+      {
+         ch1 = (char)(*pIn);
+         pIn++;
+         ch2 = (char)(*pIn);
+         pIn++;
+
+         ch = HexCharToBin(ch1)*0x10 + HexCharToBin(ch2);
+/*
+         if (CharsProcessed%64 == 0)
+         {
+           sprintf(pOut,"%08X: \"",CharsProcessed); // Print offset
+           n = strlen(pOut);
+           *pcbBufferOut += n;
+           pOut += n;
+           LineOpen = 1;
+         }
+         CharsProcessed++;
+
+         sprintf(pOut,"%c",isprint(ch)?ch:'.'); // Print byte in ascii 
+         n = strlen(pOut);
+         *pcbBufferOut += n;
+         pOut += n;
+
+         if (CharsProcessed%64 == 0)
+         {
+           if( g_fUseCRLF )
+             sprintf(pOut,"\"\r\n");
+           else
+             sprintf(pOut,"\"\n");
+           n = strlen(pOut);
+           *pcbBufferOut += n;
+           pOut += n;
+           LineOpen = 0;
+         }
+*/
+         *pOut = ch;
+         pOut += 1;
+         *pcbBufferOut += 1;
+
+      }
+/*
+      if (LineOpen)
+      {
+        if( g_fUseCRLF )
+          sprintf(pOut,"\"\r\n");
+        else
+          sprintf(pOut,"\"\n");
+        n = strlen(pOut);
+        *pcbBufferOut += n;
+        pOut += n;
+        LineOpen = 0;
+      }
+*/
+   }
+   
+   
+   return 0;
+}
