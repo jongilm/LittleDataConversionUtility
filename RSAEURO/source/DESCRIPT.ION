@@ -1,0 +1,13 @@
+desc.c * - DES Source
+md2c.c ? - MD2 Message Digest
+md4c.c * - MD4 Message Digest 
+md5c.c ? - MD5 Message Digest
+prime.c * - Prime Number Gen.
+rsa.c * - RSA Routines
+r_dh.c ** - D-H Key Agreement
+r_encode.c * - RFC1113 Encoding
+r_keygen.c * - Key Generation
+r_random.c * - Random Numbers
+r_stdlib.c * - Std Library
+shsc.c * - SHS Hash code
+nn.c * - Math Library
