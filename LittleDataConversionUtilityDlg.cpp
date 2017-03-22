@@ -45,6 +45,10 @@ enum // m_Format
   FORMAT_BASIC,
   FORMAT_NORMAL,
   FORMAT_VERBOSE,
+  FORMAT_C1,
+  FORMAT_C2,
+  FORMAT_C4,
+  FORMAT_C8,
   FORMAT_DEFAULT = FORMAT_BASIC
 };
 
@@ -151,6 +155,21 @@ END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // CLittleDataConversionUtilityDlg message handlers
+
+void CLittleDataConversionUtilityDlg::SetDefaults(void)
+{
+  hexdump_config(HEX_USE_CRLF                   ,TRUE);
+  hexdump_config(HEX_ASCII_ONLY                 ,FALSE);
+  hexdump_config(HEX_DISPLAY_HEADERS            ,m_Format==FORMAT_VERBOSE);
+  hexdump_config(HEX_DISPLAY_ADDRESSES          ,m_Format==FORMAT_NORMAL || m_Format==FORMAT_VERBOSE);
+  hexdump_config(HEX_DISPLAY_ASCII_CHARS        ,m_Format==FORMAT_NORMAL || m_Format==FORMAT_VERBOSE);
+  hexdump_config(HEX_DISPLAY_INTERMEDIATE_SPACES,m_Format==FORMAT_NORMAL || m_Format==FORMAT_VERBOSE);
+  hexdump_config(HEX_DISPLAY_C                  ,(m_Format==FORMAT_C1)?1:
+                                                 (m_Format==FORMAT_C2)?2:
+                                                 (m_Format==FORMAT_C4)?4:
+                                                 (m_Format==FORMAT_C8)?8:0);
+  base64_config (B64_USE_CRLF                   ,TRUE);
+}
 
 BOOL CLittleDataConversionUtilityDlg::OnInitDialog()
 {
@@ -356,13 +375,7 @@ void CLittleDataConversionUtilityDlg::OnButtonConvert()
 
   GETFIELDDATA();
 
-  hexdump_config(HEX_USE_CRLF                   ,TRUE);
-  hexdump_config(HEX_ASCII_ONLY                 ,FALSE);
-  hexdump_config(HEX_DISPLAY_HEADERS            ,m_Format>=FORMAT_VERBOSE);
-  hexdump_config(HEX_DISPLAY_ADDRESSES          ,m_Format>=FORMAT_NORMAL);
-  hexdump_config(HEX_DISPLAY_ASCII_CHARS        ,m_Format>=FORMAT_NORMAL);
-  hexdump_config(HEX_DISPLAY_INTERMEDIATE_SPACES,m_Format>=FORMAT_NORMAL);
-  base64_config (B64_USE_CRLF                   ,TRUE);
+  SetDefaults();
 
   UnEscapeData(m_Edit1);
   //UnEscapeData(m_Edit2);
@@ -394,6 +407,21 @@ void CLittleDataConversionUtilityDlg::OnButtonConvert()
   }
   else if (m_Action == ACTION_HEX) // 0=Base64, 1=Hex, 2=MD5 (default=Base64) 
   {
+    if (m_Format == FORMAT_C1 || m_Format == FORMAT_C2 || m_Format == FORMAT_C4 || m_Format == FORMAT_C8)
+    {
+       hexdump_config(HEX_DISPLAY_HEADERS            ,FALSE);
+       hexdump_config(HEX_DISPLAY_ADDRESSES          ,FALSE);
+       hexdump_config(HEX_DISPLAY_ASCII_CHARS        ,FALSE);
+       hexdump_config(HEX_DISPLAY_INTERMEDIATE_SPACES,FALSE);
+       switch(m_Format)
+       {
+          default:
+          case FORMAT_C1: hexdump_config(HEX_DISPLAY_C, 1); break;
+          case FORMAT_C2: hexdump_config(HEX_DISPLAY_C, 2); break;
+          case FORMAT_C4: hexdump_config(HEX_DISPLAY_C, 4); break;
+          case FORMAT_C8: hexdump_config(HEX_DISPLAY_C, 8); break;
+       }
+    }
     if (m_Radio_Encode==0) // Encode
     {
       int rc;
@@ -420,6 +448,7 @@ void CLittleDataConversionUtilityDlg::OnButtonConvert()
       rc = hexundump(pBuffer2, cbBuffer2, pBuffer1, &cbBuffer1);
       m_Edit1.ReleaseBuffer(cbBuffer1);
     }
+    SetDefaults();
   }
   else if (m_Action == ACTION_MD5) // 0=Base64, 1=Hex, 2=MD5 (default=Base64) 
   {
@@ -515,13 +544,7 @@ void CLittleDataConversionUtilityDlg::OnButtonConvert()
     int rc;
 
     // Hexdump must produce a raw 01020304...EF result
-    hexdump_config(HEX_USE_CRLF                   ,TRUE);
-    hexdump_config(HEX_ASCII_ONLY                 ,FALSE);
-    hexdump_config(HEX_DISPLAY_HEADERS            ,m_Format>=FORMAT_VERBOSE);
-    hexdump_config(HEX_DISPLAY_ADDRESSES          ,m_Format>=FORMAT_NORMAL);
-    hexdump_config(HEX_DISPLAY_ASCII_CHARS        ,m_Format>=FORMAT_NORMAL);
-    hexdump_config(HEX_DISPLAY_INTERMEDIATE_SPACES,m_Format>=FORMAT_NORMAL);
-    base64_config (B64_USE_CRLF                   ,TRUE);
+    SetDefaults();
 
     // Decode RandomChallenge from Base64 to Text
     cbBuffer2 = m_RandomChallenge.GetLength();
@@ -611,6 +634,10 @@ void CLittleDataConversionUtilityDlg::OnRadio1Base64()
   GetDlgItem(IDC_RADIO_FORMAT_VERBOSE)->EnableWindow(FALSE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_NORMAL)->EnableWindow(FALSE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_BASIC)->EnableWindow(FALSE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C1)->EnableWindow(FALSE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C2)->EnableWindow(FALSE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C4)->EnableWindow(FALSE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C8)->EnableWindow(FALSE); // Without a member variable
 
   GetDlgItem(IDC_EDIT_RANDOMCHALLENGE)->EnableWindow(FALSE); // Without a member variable
   GetDlgItem(IDC_EDIT_USERID)->EnableWindow(FALSE); // Without a member variable
@@ -630,6 +657,10 @@ void CLittleDataConversionUtilityDlg::OnRadio1Hex()
   GetDlgItem(IDC_RADIO_FORMAT_VERBOSE)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_NORMAL)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_BASIC)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C1)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C2)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C4)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C8)->EnableWindow(TRUE); // Without a member variable
 
   GetDlgItem(IDC_EDIT_RANDOMCHALLENGE)->EnableWindow(FALSE); // Without a member variable
   GetDlgItem(IDC_EDIT_USERID)->EnableWindow(FALSE); // Without a member variable
@@ -649,6 +680,10 @@ void CLittleDataConversionUtilityDlg::OnRadio1Md5()
   GetDlgItem(IDC_RADIO_FORMAT_VERBOSE)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_NORMAL)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_BASIC)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C1)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C2)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C4)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C8)->EnableWindow(TRUE); // Without a member variable
 
   GetDlgItem(IDC_EDIT_RANDOMCHALLENGE)->EnableWindow(FALSE); // Without a member variable
   GetDlgItem(IDC_EDIT_USERID)->EnableWindow(FALSE); // Without a member variable
@@ -668,6 +703,10 @@ void CLittleDataConversionUtilityDlg::OnRadio1HmacMd5()
   GetDlgItem(IDC_RADIO_FORMAT_VERBOSE)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_NORMAL)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_BASIC)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C1)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C2)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C4)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C8)->EnableWindow(TRUE); // Without a member variable
 
   GetDlgItem(IDC_EDIT_RANDOMCHALLENGE)->EnableWindow(FALSE); // Without a member variable
   GetDlgItem(IDC_EDIT_USERID)->EnableWindow(FALSE); // Without a member variable
@@ -687,6 +726,10 @@ void CLittleDataConversionUtilityDlg::OnRadio1CramMd5()
   GetDlgItem(IDC_RADIO_FORMAT_VERBOSE)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_NORMAL)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_RADIO_FORMAT_BASIC)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C1)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C2)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C4)->EnableWindow(TRUE); // Without a member variable
+  GetDlgItem(IDC_RADIO_FORMAT_C8)->EnableWindow(TRUE); // Without a member variable
 
   GetDlgItem(IDC_EDIT_RANDOMCHALLENGE)->EnableWindow(TRUE); // Without a member variable
   GetDlgItem(IDC_EDIT_USERID)->EnableWindow(TRUE); // Without a member variable
@@ -698,7 +741,4 @@ void CLittleDataConversionUtilityDlg::OnButtonClose()
 	// TODO: Add your control notification handler code here
 	OnOK();
 }
-
-
-
 

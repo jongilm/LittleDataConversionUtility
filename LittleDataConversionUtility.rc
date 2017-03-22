@@ -32,13 +32,14 @@ CAPTION "About LittleDataConversionUtility"
 FONT 8, "MS Sans Serif"
 BEGIN
     ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
-    LTEXT           "Little Data Conversion Utility Version 1.0",IDC_STATIC,
+    LTEXT           "Little Data Conversion Utility Version 1.1",IDC_STATIC,
                     40,10,132,8,SS_NOPREFIX
-    LTEXT           "JGilmore 2007",IDC_STATIC,40,25,119,8
+    LTEXT           "Copyright (C) 2007-2011 Jonathan Gilmore",IDC_STATIC,40,
+                    25,188,8
     DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
 END
 
-IDD_LITTLEDATACONVERSIONUTILITY_DIALOG DIALOGEX 0, 0, 479, 354
+IDD_LITTLEDATACONVERSIONUTILITY_DIALOG DIALOGEX 0, 0, 479, 357
 STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "Little Data Conversion Utility"
@@ -58,7 +59,7 @@ BEGIN
                     ES_AUTOHSCROLL | WS_VSCROLL | WS_HSCROLL
     EDITTEXT        IDC_EDIT2_SIZE,400,252,72,13,ES_AUTOHSCROLL | ES_NUMBER,
                     WS_EX_RIGHT
-    GROUPBOX        "&Action",IDC_STATIC,7,265,70,82
+    GROUPBOX        "&Action",IDC_STATIC,7,265,70,85
     CONTROL         "&Base64",IDC_RADIO1_BASE64,"Button",BS_AUTORADIOBUTTON | 
                     WS_GROUP | WS_TABSTOP,15,275,40,10
     CONTROL         "&Hex",IDC_RADIO1_HEX,"Button",BS_AUTORADIOBUTTON | 
@@ -68,27 +69,35 @@ BEGIN
     CONTROL         "H&MAC_MD5",IDC_RADIO1_HMAC_MD5,"Button",
                     BS_AUTORADIOBUTTON | WS_TABSTOP,15,305,56,10
     CONTROL         "CRAM_MD5",IDC_RADIO1_CRAM_MD5,"Button",
-                    BS_AUTORADIOBUTTON,16,316,56,10
+                    BS_AUTORADIOBUTTON,16,315,56,10
     GROUPBOX        "Encode/Decode",IDC_STATIC_ENCODE_DECODE,82,265,76,37
     CONTROL         "&Encode (1 -> 2)",IDC_RADIO_ENCODE,"Button",
-                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,90,276,65,10
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,90,275,65,10
     CONTROL         "&Decode (2 -> 1)",IDC_RADIO_DECODE,"Button",
-                    BS_AUTORADIOBUTTON | WS_TABSTOP,90,287,65,10
-    GROUPBOX        "Format",IDC_STATIC_FORMAT,163,265,62,51
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,90,285,65,10
+    GROUPBOX        "Format",IDC_STATIC_FORMAT,163,265,82,85
     CONTROL         "B&asic",IDC_RADIO_FORMAT_BASIC,"Button",
-                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,173,276,33,10
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,173,275,33,10
     CONTROL         "&Normal",IDC_RADIO_FORMAT_NORMAL,"Button",
-                    BS_AUTORADIOBUTTON | WS_TABSTOP,173,288,38,11
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,173,285,38,11
     CONTROL         "&Verbose",IDC_RADIO_FORMAT_VERBOSE,"Button",
-                    BS_AUTORADIOBUTTON | WS_TABSTOP,173,300,43,11
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,173,295,43,11
+    CONTROL         "&C Format(1byte)",IDC_RADIO_FORMAT_C1,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,173,305,69,11
+    CONTROL         "&C Format(2byte)",IDC_RADIO_FORMAT_C2,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,173,315,69,11
+    CONTROL         "&C Format(4byte)",IDC_RADIO_FORMAT_C4,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,173,325,69,11
+    CONTROL         "&C Format(8byte)",IDC_RADIO_FORMAT_C8,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,173,335,69,11
     LTEXT           "&Random Challenge:",IDC_STATIC,251,265,63,8
     EDITTEXT        IDC_EDIT_RANDOMCHALLENGE,251,274,213,12,ES_AUTOHSCROLL
     LTEXT           "&Key/Password:",IDC_STATIC,251,293,49,8,WS_TABSTOP
     EDITTEXT        IDC_EDIT_KEY,251,303,81,12,ES_AUTOHSCROLL
     LTEXT           "&UserId:",IDC_STATIC,251,319,24,8,WS_TABSTOP
     EDITTEXT        IDC_EDIT_USERID,251,329,81,12,ES_AUTOHSCROLL
-    DEFPUSHBUTTON   "&Go",IDC_BUTTON_CONVERT,364,333,50,14
-    PUSHBUTTON      "E&xit",IDC_BUTTON_CLOSE,422,333,50,14
+    DEFPUSHBUTTON   "&Go",IDC_BUTTON_CONVERT,364,336,50,14
+    PUSHBUTTON      "E&xit",IDC_BUTTON_CLOSE,422,336,50,14
 END
 
 
@@ -99,8 +108,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,0,0,1
+ FILEVERSION 1,1,0,0
+ PRODUCTVERSION 1,1,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -118,14 +127,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "Little Data Conversion Utility\0"
-            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "FileVersion", "1, 1, 0, 0\0"
             VALUE "InternalName", "LittleDataConversionUtility\0"
-            VALUE "LegalCopyright", "Copyright (C) 2007\0"
+            VALUE "LegalCopyright", "Copyright (C) 2007-2011 Jonathan Gilmore\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "LittleDataConversionUtility.EXE\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Little Data Conversion Utility\0"
-            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "ProductVersion", "1, 1, 0, 0\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -159,7 +168,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 472
         TOPMARGIN, 7
-        BOTTOMMARGIN, 347
+        BOTTOMMARGIN, 350
         HORZGUIDE, 265
     END
 END

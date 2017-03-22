@@ -57,6 +57,7 @@ protected:
 	afx_msg void OnButtonClose();
 	afx_msg void OnRadio1HmacMd5();
 	afx_msg void OnRadio1CramMd5();
+	afx_msg void OnRadio1Hex64();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 
@@ -64,6 +65,7 @@ private:
   CFont m_Font_Title;
   CFont m_Font_MultilineEditFields;
 
+  void SetDefaults(void);
   void UnEscapeData(CString &Str1);
   void EscapeData(CString &Str1);
   void UnEscapeData(unsigned char *pBufferIn, unsigned int cbBufferIn, unsigned char *pBufferOut, unsigned int *pcbBufferOut);

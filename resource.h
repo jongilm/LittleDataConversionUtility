@@ -26,11 +26,15 @@
 #define IDC_RADIO_FORMAT_BASIC          1020
 #define IDC_STATIC_FORMAT               1021
 #define IDC_BUTTON_CLOSE                1022
-#define IDC_RADIO1_HMAC_MD5             1024
-#define IDC_EDIT_KEY                    1025
-#define IDC_EDIT_USERID                 1026
-#define IDC_EDIT_RANDOMCHALLENGE        1027
-#define IDC_RADIO1_CRAM_MD5             1028
+#define IDC_RADIO1_HMAC_MD5             1023
+#define IDC_EDIT_KEY                    1024
+#define IDC_EDIT_USERID                 1025
+#define IDC_EDIT_RANDOMCHALLENGE        1026
+#define IDC_RADIO1_CRAM_MD5             1027
+#define IDC_RADIO_FORMAT_C1             1028
+#define IDC_RADIO_FORMAT_C2             1029
+#define IDC_RADIO_FORMAT_C4             1030
+#define IDC_RADIO_FORMAT_C8             1031
 
 // Next default values for new objects
 // 
@@ -38,7 +42,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        129
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1029
+#define _APS_NEXT_CONTROL_VALUE         1032
 #define _APS_NEXT_SYMED_VALUE           101
 #endif
 #endif

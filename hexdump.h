@@ -14,7 +14,8 @@ typedef enum
   HEX_DISPLAY_HEADERS,            
   HEX_DISPLAY_ADDRESSES,          
   HEX_DISPLAY_ASCII_CHARS,         
-  HEX_DISPLAY_INTERMEDIATE_SPACES
+  HEX_DISPLAY_INTERMEDIATE_SPACES,
+  HEX_DISPLAY_C,
 } HEXDUMP_CONFIG;
 
 extern void hexdump_config(HEXDUMP_CONFIG config_param, int Value);
